@@ -1,3 +1,4 @@
 game
 a.out
-include/glad/*
+include/glad/glad.h
+include/glad/KHR/*

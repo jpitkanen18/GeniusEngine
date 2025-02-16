@@ -13,17 +13,17 @@ using GameWindow = int;
 
 static const struct
 {
-    float x, y;
-    float r, g, b;
+	float x, y;
+	float r, g, b;
 }
 vertices[6] =
 {
-  {-0.6f, -0.4f, 1.f, 0.f, 0.f},
-  {0.6f, -0.4f, 0.f, 1.f, 0.f},
-  {0.f, 0.6f, 0.f, 0.f, 1.f},
-  {0.6f, -0.4f, 0.f, 0.f, 0.f},
-  {-0.6f, 0.4f, 0.f, 1.f, 0.f},
-  {0.f, -0.6f, 0.f, 0.f, 1.f},
+	{-0.6f, -0.4f, 1.f, 0.f, 0.f},
+	{0.6f, -0.4f, 0.f, 1.f, 0.f},
+	{0.f, 0.6f, 0.f, 0.f, 1.f},
+	{0.6f, -0.4f, 0.f, 0.f, 0.f},
+	{-0.6f, 0.4f, 0.f, 1.f, 0.f},
+	{0.f, -0.6f, 0.f, 0.f, 1.f},
 };
 
 using namespace Utils;
@@ -33,23 +33,23 @@ class Engine {
 		/*
 			Constructor with a required error_callback function pointer parameter
 		*/
-		Engine(void(* error_callback)(int error_code, const char *description)) {
+		Engine(void(*error_callback)(int error_code, const char* description)) {
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 			glfwSetErrorCallback(error_callback);
 			if (!glfwInit())
 				exit(EXIT_FAILURE);
 
-			#ifdef DEBUG
+	#ifdef DEBUG
 			Println<const char*>("OpenGL loaded 🤩");
-			#endif
+	#endif
 		}
 
 
 		/*
 			Run the OpenGL loop on the GLFWwindow specified by its index in the GameWindows Vector
 		*/
-		void Run(void(* process_input)(GLFWwindow*), GameWindow win_idx) {
+		void Run(void(*process_input)(GLFWwindow*), GameWindow win_idx) {
 			GLint mvp_location, vpos_location, vcol_location;
 
 			// TODO: WIP
@@ -76,8 +76,8 @@ class Engine {
 			glEnableVertexAttribArray(vcol_location);
 			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertices[0]), (void*)(2 * sizeof(vertices[0])));
 
-			glBindBuffer(GL_ARRAY_BUFFER, 0); 
-			glBindVertexArray(0); 
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			glBindVertexArray(0);
 
 			GLFWwindow* window = GameWindows.at(win_idx);
 
@@ -102,9 +102,9 @@ class Engine {
 		int CreateWindow(int width = 1280, int height = 720, const char* title = "Minecraft 2 (legit dev build)", GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL) {
 			GLFWwindow* window = glfwCreateWindow(width, height, title, monitor, share);
 			if (!window) {
-				#ifdef DEBUG
+	#ifdef DEBUG
 				Println<const char*>("Problem window :(");
-				#endif
+	#endif
 				glfwTerminate();
 				exit(EXIT_FAILURE);
 			}
@@ -125,13 +125,13 @@ class Engine {
 			Destroy all windows in the GameWindows vector and terminate OpenGL
 		*/
 		void Kill() {
-			for(const auto window : GameWindows) {
+			for (const auto window : GameWindows) {
 				glfwDestroyWindow(window);
 			}
 			glfwTerminate();
-			#ifdef DEBUG
+	#ifdef DEBUG
 			Println<const char*>("\nExiting now...\n");
-			#endif
+	#endif
 			exit(EXIT_SUCCESS);
-		}
+	}
 };

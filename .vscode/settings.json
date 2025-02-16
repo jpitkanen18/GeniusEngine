@@ -1,4 +1,5 @@
 {
+	"editor.tabSize": 2,
 	"files.associations": {
 		"iostream": "cpp",
 		"filesystem": "cpp",
@@ -59,5 +60,6 @@
 		"typeinfo": "cpp",
 		"variant": "cpp",
 		"format": "cpp"
-	}
+	},
+	"C_Cpp.default.compilerPath": "/usr/bin/g++"
 }

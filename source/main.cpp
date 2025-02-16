@@ -7,9 +7,9 @@
 #include "utils/utils.hpp"
 #include "classes/Engine.cpp"
 
-static void error_callback(int error, const char *description);
+static void error_callback(int error, const char* description);
 
-void processInput(GLFWwindow *window);
+void processInput(GLFWwindow* window);
 
 int main(int argc, char* argv[]) {
   using namespace Utils;
@@ -19,13 +19,13 @@ int main(int argc, char* argv[]) {
   return 0;
 }
 
-static void error_callback(int error, const char *description)
+static void error_callback(int error, const char* description)
 {
-    fprintf(stderr, "Error: %s\n", description);
+  fprintf(stderr, "Error: %s\n", description);
 }
 
-void processInput(GLFWwindow *window)
+void processInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
