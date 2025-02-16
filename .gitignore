@@ -1,4 +1,4 @@
 game
 a.out
-include/glad/glad.h
+include/glad/glad.*
 include/glad/KHR/*
