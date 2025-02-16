@@ -8,4 +8,4 @@ GeniusEngine is a horrible C++ OpenGL game engine developed as a hobby by a not 
 ### Main Features
 - It spawns a window!! :skull:
 - It has unnecessary abstractions! :fire:
-- It does 3D!!! (OpenGL is 3D by default, not that you'd know due to the engine's brilliance):fire_engine:
+- It does 3D!!! (OpenGL is 3D by default, not that you'd know due to the engine's brilliance) :fire_engine:
