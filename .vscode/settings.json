@@ -1,7 +1,8 @@
 {
-	"editor.defaultFormatter": "ms-vscode.cpptools-extension-pack",
+	"editor.defaultFormatter": "EditorConfig.EditorConfig",
 	"editor.tabSize": 4,
 	"editor.formatOnSave": true,
+	"C_Cpp.vcFormat.indent.preprocessor": "none",
 	"files.associations": {
 		"iostream": "cpp",
 		"filesystem": "cpp",

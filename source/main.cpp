@@ -19,13 +19,11 @@ int main(int argc, char* argv[]) {
   return 0;
 }
 
-static void error_callback(int error, const char* description)
-{
+static void error_callback(int error, const char* description) {
   fprintf(stderr, "Error: %s\n", description);
 }
 
-void processInput(GLFWwindow* window)
-{
+void processInput(GLFWwindow* window) {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     glfwSetWindowShouldClose(window, GLFW_TRUE);
 }

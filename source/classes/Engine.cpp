@@ -29,9 +29,9 @@ vertices[6] =
 using namespace Utils;
 class Engine {
     std::vector<GLFWwindow*> GameWindows;
-public:
+    public:
     /*
-      Constructor with a required error_callback function pointer parameter
+    Constructor with a required error_callback function pointer parameter
     */
     Engine(void(*error_callback)(int error_code, const char* description)) {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
@@ -47,7 +47,7 @@ public:
 
 
     /*
-      Run the OpenGL loop on the GLFWwindow specified by its index in the GameWindows Vector
+    Run the OpenGL loop on the GLFWwindow specified by its index in the GameWindows Vector
     */
     void Run(void(*process_input)(GLFWwindow*), GameWindow win_idx) {
         GLint mvp_location, vpos_location, vcol_location;
@@ -97,7 +97,7 @@ public:
     }
 
     /*
-      Creates a GLFWwindow and stores it in the GameWindows vector
+    Creates a GLFWwindow and stores it in the GameWindows vector
     */
     int CreateWindow(int width = 1280, int height = 720, const char* title = "Minecraft 2 (legit dev build)", GLFWmonitor* monitor = NULL, GLFWwindow* share = NULL) {
         GLFWwindow* window = glfwCreateWindow(width, height, title, monitor, share);
@@ -115,14 +115,14 @@ public:
     }
 
     /*
-      Make a window current context by it's index in the GameWindows vectors
+    Make a window current context by it's index in the GameWindows vectors
     */
     void MakeContext(GameWindow win_idx) {
         glfwMakeContextCurrent(GameWindows.at(win_idx));
     }
 
     /*
-      Destroy all windows in the GameWindows vector and terminate OpenGL
+    Destroy all windows in the GameWindows vector and terminate OpenGL
     */
     void Kill() {
         for (const auto window : GameWindows) {
