@@ -1,4 +1,5 @@
 {
+	"editor.defaultFormatter": "ms-vscode.cpptools-extension-pack",
 	"editor.tabSize": 2,
 	"files.associations": {
 		"iostream": "cpp",
@@ -61,5 +62,8 @@
 		"variant": "cpp",
 		"format": "cpp"
 	},
-	"C_Cpp.default.compilerPath": "/usr/bin/g++"
+	"C_Cpp.default.compilerPath": "/usr/bin/g++",
+	"[cpp]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	}
 }
