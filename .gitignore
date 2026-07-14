@@ -1,4 +1,19 @@
-game
-a.out
-include/glad/glad.*
-include/glad/KHR/*
+# Build output
+build/
+
+# Generated config
+build.config
+
+# Third-party downloads (keep setup script, ignore large deps)
+third_party/imgui/
+third_party/glad/
+
+# Python venv (for glad generation)
+.venv/
+
+# IDE
+.vscode/
+*.dSYM/
+
+# OS
+.DS_Store

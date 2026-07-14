@@ -1,1 +1,0 @@
-g++ source/*.cpp source/*.c -g --std=c++17 -I./include/ -lGL -lglfw  -lstdc++exp -o game
