@@ -6,7 +6,7 @@ Perhaps not the most Genius, but it tries its best...
 ![OpenGL](https://img.shields.io/badge/OpenGL-4.1-5586A4?logo=opengl&logoColor=white)
 ![Vulkan](https://img.shields.io/badge/Vulkan-1.0-AC162C?logo=vulkan&logoColor=white)
 ![Metal](https://img.shields.io/badge/Metal-3-A2AAAD?logo=apple&logoColor=white)
-![macOS](https://img.shields.io/badge/macOS-supported-000000?logo=apple&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-supported-333333?logo=apple&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-supported-FCC624?logo=linux&logoColor=black)
 ![Windows](https://img.shields.io/badge/Windows-planned-0078D4?logo=windows&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
@@ -291,26 +291,82 @@ ui().endPanel();
 ```cpp
 class DebugPanel : public GE::UI::Panel {
 public:
-    float *speed = nullptr;
-    bool *wireframe = nullptr;
+    float speed = 1.0f;
+    bool wireframe = false;
+    int selectedItem = 0;
+    Vec3 lightDir = {0, 1, 0};
 
     void layout() override {
-        slider("Speed", *speed, 0.0f, 10.0f);
-        checkbox("Wireframe", *wireframe);
-        separator();
+        // Basic widgets
         label("FPS: " + std::to_string(fps));
+        labelColored({1, 0.5f, 0, 1}, "Warning: low FPS");
+        separator();
+
+        // Value controls
+        slider("Speed", speed, 0.0f, 10.0f);
+        slider3("Light Dir", lightDir, -1.0f, 1.0f);
+        inputFloat("Speed (precise)", speed, 0.01f);
+        checkbox("Wireframe", wireframe);
+        colorEdit("Sky", skyColor);
+
+        // Dropdown combo
+        if (beginCombo("Mode", modes[selectedItem])) {
+            for (int i = 0; i < 3; ++i)
+                if (selectableItem(modes[i], i == selectedItem))
+                    selectedItem = i;
+            endCombo();
+        }
+
+        // Collapsible tree
+        if (treeNode("Advanced")) {
+            slider("Gamma", gamma, 0.1f, 3.0f);
+            treePop();
+        }
+
+        // Or use section() for cleaner collapsibles
+        section("Debug", [&] {
+            label("Draw calls: " + std::to_string(drawCalls));
+            progressBar(gpuLoad, "GPU");
+        });
+
+        // Layout helpers
+        spacing();
+        if (button("Reset")) resetAll();
+        sameLine();
+        if (button("Apply", {100, 30})) apply();
     }
 };
 
 // In your app:
-DebugPanel m_debugPanel{"Debug"};
+DebugPanel m_debugPanel{"Controls"};
 
 void onUI() override {
-    m_debugPanel.speed = &m_speed;
-    m_debugPanel.wireframe = &m_wireframe;
     m_debugPanel.draw(ui());
 }
 ```
+
+**Panel Widget Reference:**
+
+| Widget | Signature | Notes |
+|--------|-----------|-------|
+| `label` | `(string)` | Static text |
+| `labelColored` | `(Color, string)` | Tinted text |
+| `separator` | `()` | Horizontal line |
+| `spacing` | `()` | Vertical gap |
+| `sameLine` | `(offset=0)` | Next widget on same line |
+| `button` | `(label, size={0,0}) → bool` | Returns true on click |
+| `checkbox` | `(label, bool&) → bool` | Toggle |
+| `slider` | `(label, float&, min, max) → bool` | Float slider |
+| `slider3` | `(label, Vec3&, min, max) → bool` | 3-component slider |
+| `colorEdit` | `(label, Vec3&) → bool` | RGB color picker |
+| `inputFloat` | `(label, float&, step) → bool` | Numeric input |
+| `beginCombo` | `(label, preview) → bool` | Start dropdown |
+| `selectableItem` | `(label, selected) → bool` | Dropdown option |
+| `endCombo` | `()` | End dropdown |
+| `treeNode` | `(label) → bool` | Collapsible section start |
+| `treePop` | `()` | End collapsible section |
+| `progressBar` | `(fraction, overlay)` | 0.0–1.0 bar |
+| `section` | `(label, lambda)` | Tree node + auto-pop |
 
 ### Input
 
